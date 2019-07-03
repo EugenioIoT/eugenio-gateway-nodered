@@ -1,0 +1,134 @@
+[
+  {
+      "id": "bf4aae6f.0e7ab",
+      "type": "tab",
+      "label": "Flow 1",
+      "disabled": false,
+      "info": ""
+  },
+  {
+      "id": "a72218c2.01b408",
+      "type": "mqtt-broker",
+      "z": "",
+      "name": "Eugenio-Broker",
+      "broker": "logicalis-eugeniostg-iothub.azure-devices.net",
+      "port": "8883",
+      "tls": "4b6210d3.648f6",
+      "clientid": "{deviceId}",
+      "usetls": true,
+      "compatmode": false,
+      "keepalive": "60",
+      "cleansession": true,
+      "birthTopic": "devices/{deviceId}/messages/events/",
+      "birthQos": "0",
+      "birthPayload": "msg.payload",
+      "closeTopic": "",
+      "closeQos": "0",
+      "closePayload": "",
+      "willTopic": "",
+      "willQos": "0",
+      "willPayload": ""
+  },
+  {
+      "id": "4b6210d3.648f6",
+      "type": "tls-config",
+      "z": "",
+      "name": "Eugenio-Certs",
+      "cert": "",
+      "key": "",
+      "ca": "",
+      "certname": "nodered.cert",
+      "keyname": "nodered.key",
+      "caname": "CA.cert",
+      "servername": "",
+      "verifyservercert": false
+  },
+  {
+      "id": "ca9f7aeb.7ed248",
+      "type": "trigger",
+      "z": "bf4aae6f.0e7ab",
+      "op1": "true",
+      "op2": "0",
+      "op1type": "bool",
+      "op2type": "str",
+      "duration": "-1",
+      "extend": false,
+      "units": "min",
+      "reset": "",
+      "bytopic": "all",
+      "name": "",
+      "x": 330,
+      "y": 160,
+      "wires": [
+          [
+              "95f5c6c5.a2a498",
+              "50c5c2e4.738d6c"
+          ]
+      ]
+  },
+  {
+      "id": "b1e8ee48.e7e85",
+      "type": "inject",
+      "z": "bf4aae6f.0e7ab",
+      "name": "",
+      "topic": "",
+      "payload": "true",
+      "payloadType": "bool",
+      "repeat": "",
+      "crontab": "",
+      "once": false,
+      "onceDelay": 0.1,
+      "x": 150,
+      "y": 160,
+      "wires": [
+          [
+              "ca9f7aeb.7ed248"
+          ]
+      ]
+  },
+  {
+      "id": "95f5c6c5.a2a498",
+      "type": "function",
+      "z": "bf4aae6f.0e7ab",
+      "name": "Gateway Health",
+      "func": "msg = {\n  \"payload\": {\n    \"schema\": \"gateway_health\",\n    \"payload\": {\n        \"cpu\": 15.7, \n        \"created_date\": Date.now(), \n        \"disk\": 9,\n        \"memory\": 76.3, \n        \"uptime\": 1906,\n        \"ig_device_id\" : \"{deviceId}\",\n    }\n  }\n};\n\nreturn msg;",
+      "outputs": 1,
+      "noerr": 0,
+      "x": 560,
+      "y": 100,
+      "wires": [
+          [
+              "6fae3bd7.888464"
+          ]
+      ]
+  },
+  {
+      "id": "6fae3bd7.888464",
+      "type": "mqtt out",
+      "z": "bf4aae6f.0e7ab",
+      "name": "Eugenio-MQTT",
+      "topic": "devices/{deviceId}/messages/events/",
+      "qos": "0",
+      "retain": "",
+      "broker": "a72218c2.01b408",
+      "x": 800,
+      "y": 160,
+      "wires": []
+  },
+  {
+      "id": "50c5c2e4.738d6c",
+      "type": "function",
+      "z": "bf4aae6f.0e7ab",
+      "name": "ISD_AMB",
+      "func": "msg = {\n  \"payload\": {\n    \"schema\": \"isd_amb\",\n    \"payload\": {\n        \"isd_amb_sndmax\" : 1.5,\n        \"isd_amb_ain0_max\" : 10,\n        \"isd_amb_accelx\" : 5.4,\n        \"isd_amb_sndraw\" : 8.7,\n        \"isd_amb_accely\" : 1.0,\n        \"isd_amb_ain1_raw\" : 5,\n        \"isd_amb_tempint0\" : 25,\n        \"isd_amb_humid\" : 65.7,\n        \"isd_amb_ain0_min\" : 1,\n        \"isd_amb_ain0_avg\" : 7,\n        \"isd_amb_tempint1\" : 31,\n        \"isd_amb_dout0\" : false,\n        \"isd_amb_dout1\" : true,\n        \"isd_amb_id\" : \"isd-{deviceId}\",\n        \"isd_amb_ain1_min\" : 2,\n        \"isd_amb_ain1_avg\" : 3,\n        \"isd_amb_uvlight\" : 20.7,\n        \"node\" : \"gateway-{deviceId}\",\n        \"isd_amb_ain1_max\" : 5,\n        \"isd_amb_tempext\" : 21.4,\n        \"isd_amb_vislight\" : 40,\n        \"isd_amb_pressbar\" : 10,\n        \"isd_amb_accelz\" : 2.1,\n        \"isd_amb_din0\" : false,\n        \"isd_amb_din1\" : false,\n        \"isd_amb_irlight\" : 10.9,\n        \"created_date\" : Date.now(),\n        \"isd_amb_sndmin\" : 4.1,\n        \"isd_amb_sndavg\" : 5.1,\n        \"isd_amb_ain0_raw\" : 10\n    }\n  }\n};\n\nreturn msg;\n\n\n",
+      "outputs": 1,
+      "noerr": 0,
+      "x": 560,
+      "y": 200,
+      "wires": [
+          [
+              "6fae3bd7.888464"
+          ]
+      ]
+  }
+]
