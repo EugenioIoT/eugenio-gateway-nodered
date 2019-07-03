@@ -34,10 +34,14 @@ It's importante to build a new image using the DockerHub's Eugenio-Gateway-Noder
 
 After building, you need to run the container exposing the port 1880 to access the Node-RED running in it. To do this, you can just run the command below:
 
-- Running the image builded localy by Dockerfile, you need to pass the APIKEY environment variable (used to register the device): 
+- Running the image builded localy by Dockerfile, you need to pass the APIKEY environment variable (used to register the device):
+    
+
     docker run -p 1880:1880 -d --name EugenioNodeRED swlogicalis/eugenio-gateway-nodered:latest -e APIKEY="apikey"
 
-- Running the official image: 
+- Running the official image:
+
+
     docker run -p 1880:1880 -d --name EugenioNodeRED swlogicalis/eugenio-gateway-nodered:latest
 
 If you are running the oficial image, please follow the next steps to register a new device and configure manualy your Node-RED, otherwise everthing is already done, you can just click the Injection's node button to start sending messages!
