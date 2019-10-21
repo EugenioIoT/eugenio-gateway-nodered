@@ -26,20 +26,20 @@ Docker Images:
 
 See <https://docs.docker.com/get-started/part2/#build-the-app> for details about how to build a Dockerfile, after that, see <https://docs.docker.com/get-started/> for details about running a docker container.
 
-First of all, you need to build the local image with the Dockerfile in the repository. Run the followed command (inside the directory):
+First of all, you can build the local image with the Dockerfile in the repository. Run the followed command (inside the directory):
 
     docker build . --tag swlogicalis/eugenio-gateway-nodered:latest
 
 It's importante to build a new image using the DockerHub's Eugenio-Gateway-Nodered image, because during the local building there are some configurations of device registration in Eugenio that haven't be done in the official DockerHub image (you can use the official image and make the device registration by yourself).
 
-After building, you need to run the container exposing the port 1880 to access the Node-RED running in it. To do this, you can just run the command below:
+You can run the container exposing the port 1880 to access the Node-RED running in it. To do this, you just need to run the command below:
 
-- Running the image builded localy by Dockerfile, you need to pass the APIKEY environment variable (used to register the device):
+- Running the image passing the APIKEY environment variable (used to register the device):
     
 
-    docker run -p 1880:1880 -d --name EugenioNodeRED swlogicalis/eugenio-gateway-nodered:latest -e APIKEY="apikey"
+    docker run -p 1880:1880 -d --name EugenioNodeRED  -e APIKEY="apikey" swlogicalis/eugenio-gateway-nodered:latest
 
-- Running the official image:
+- Running the image without APIKEY (you will need to register the device mannualy and replace "null" fields with the id of your device):
 
 
     docker run -p 1880:1880 -d --name EugenioNodeRED swlogicalis/eugenio-gateway-nodered:latest
