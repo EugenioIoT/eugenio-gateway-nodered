@@ -18,7 +18,7 @@
         "type": "mqtt-broker",
         "z": "",
         "name": "Eugenio-Broker",
-        "broker": "logicalis-eugeniostg-iothub.azure-devices.net",
+        "broker": "eugenioprod-iothub.azure-devices.net",
         "port": "8883",
         "tls": "4b6210d3.648f6",
         "clientid": "{deviceId}",

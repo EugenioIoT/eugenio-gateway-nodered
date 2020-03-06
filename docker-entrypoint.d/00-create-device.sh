@@ -11,7 +11,7 @@ KEY=$(sed 's/$/\\n/' key.pem | tr -d '\n' | sed 's!\\!\\\\!g')
 THUMBPRINT=$(openssl x509 -in cert.pem -fingerprint -noout | cut -d '=' -f 2)
 
 # Registrate device at Eugenio
-ID=$(curl -X POST "https://portal.stg.eugenio.io/api/v1/things" -H "Content-Type: application/json" -H "apikey: $APIKEY" --data "{\"thumbprint\": \"$THUMBPRINT\", \"tags\": {\"deviceName\": \"nodered-$RANDOM\"}}" | jq '.deviceId' | tr -d '"')
+ID=$(curl -X POST "https://portal.eugenio.io/api/v1/things" -H "Content-Type: application/json" -H "apikey: $APIKEY" --data "{\"thumbprint\": \"$THUMBPRINT\", \"tags\": {\"deviceName\": \"nodered-$RANDOM\"}}" | jq '.deviceId' | tr -d '"')
 
 echo "id ---- $ID"
 

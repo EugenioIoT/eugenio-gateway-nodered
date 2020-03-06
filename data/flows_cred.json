@@ -1,6 +1,6 @@
 {
     "a72218c2.01b408": {
-      "user": "logicalis-eugeniostg-iothub.azure-devices.net/{deviceId}/api-version=2017-06-30"
+      "user": "eugenioprod-iothub.azure-devices.net/{deviceId}/api-version=2017-06-30"
     },
     "4b6210d3.648f6": {
       "certdata": "{cert}",
